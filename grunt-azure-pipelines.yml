@@ -18,6 +18,9 @@ jobs:
           packageType: 'sdk'
           version: '9.0.x'
 
+      - task: NuGetAuthenticate@1
+        displayName: 'Authenticate to Azure Artifacts'
+
       - script: git submodule update --init --recursive
         displayName: 'Update Git Submodules'
         

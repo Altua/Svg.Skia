@@ -3,7 +3,7 @@
   <PropertyGroup>
     <VersionPrefix>2.0.0.4</VersionPrefix>
     <VersionSuffix></VersionSuffix>
-    <AvaloniaVersionPrefix>11.2.0.2</AvaloniaVersionPrefix>
+    <AvaloniaVersionPrefix>11.57.3.0</AvaloniaVersionPrefix>
     <AvaloniaVersionSuffix>$(VersionSuffix)</AvaloniaVersionSuffix>
     <Authors>Wiesław Šoltés</Authors>
     <Company>Wiesław Šoltés</Company>
