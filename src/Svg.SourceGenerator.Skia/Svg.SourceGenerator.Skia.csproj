@@ -9,6 +9,7 @@
     <IncludeBuildOutput>False</IncludeBuildOutput>
     <NoPackageAnalysis>True</NoPackageAnalysis>
     <IsRoslynComponent>true</IsRoslynComponent>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -18,7 +19,6 @@
     <PackageTags>svg;skia;skiasharp;sourcegenerator;compiler;csharp;codegen;graphics</PackageTags>
   </PropertyGroup>
   
-  <Import Project="..\..\build\Base.props" />
   <Import Project="..\..\build\SourceLink.props" />
   <Import Project="..\..\build\SignAssembly.props" />
 
