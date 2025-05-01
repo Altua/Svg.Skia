@@ -108,7 +108,7 @@ public class AvaloniaAssetLoader : SM.IAssetLoader
             }
 
             var glyphTypeface = (typeface ?? Typeface.Default).GlyphTypeface;
-            runningAdvance += glyphTypeface.GetGlyphAdvance(glyphTypeface.GetGlyph((uint)codepoint));
+            runningAdvance += (float)glyphTypeface.GetGlyphAdvance(glyphTypeface.GetGlyph((uint)codepoint)) / glyphTypeface.Metrics.DesignEmHeight;
 
             if (char.IsHighSurrogate(text[i]))
             {

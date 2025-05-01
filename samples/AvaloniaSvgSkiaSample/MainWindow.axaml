@@ -25,7 +25,7 @@
           <ComboBoxItem>Uniform</ComboBoxItem>
           <ComboBoxItem>UniformToFill</ComboBoxItem>
         </ComboBox>
-        <Svg Name="svgSvg" Path="/Assets/__tiger.svg" />
+        <Svg Name="svgSvg" Path="/Assets/__text.svg" />
       </DockPanel>
     </TabItem>
 
@@ -71,7 +71,7 @@
           <ComboBoxItem>Uniform</ComboBoxItem>
           <ComboBoxItem>UniformToFill</ComboBoxItem>
         </ComboBox>
-        <Image Name="svgExtensionImage" Source="{SvgImage /Assets/__tiger.svg}" />
+        <Image Name="svgExtensionImage" Source="{SvgImage /Assets/__text.svg}" />
       </DockPanel>
     </TabItem>
 
@@ -105,7 +105,7 @@
                  HorizontalAlignment="Stretch" 
                  DragDrop.AllowDrop="True">
         <DockPanel.Resources>
-          <svg:SvgImage x:Key="__tiger" Source="/Assets/__tiger.svg" />
+          <svg:SvgImage x:Key="__tiger" Source="/Assets/__text.svg" />
         </DockPanel.Resources>
         <ComboBox Name="svgResourceStretch" 
                   DockPanel.Dock="Top" 
