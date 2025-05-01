@@ -41,6 +41,24 @@ public sealed class TextDrawable : DrawableBase
         // TODO: Initialize
     }
 
+    private static void DrawLine(float x, float y, float length, float thickness, SKPaint skPaint, SKCanvas skCanvas)
+    {
+        var linePaint = new SKPaint
+        {
+            Style = SKPaintStyle.Stroke,
+            Color = skPaint.Color,
+            StrokeWidth = thickness,
+            IsAntialias = true,
+        };
+
+        SKPath path = new SKPath();
+        path.MoveTo(x, y);
+        path.LineTo(x + length, y);
+        path.Close();
+
+        skCanvas.DrawPath(path, linePaint);
+    }
+
     internal void GetPositionsX(SvgTextBase svgTextBase, SKRect skBounds, List<float> xs)
     {
         var _x = svgTextBase.X;
@@ -275,9 +293,25 @@ public sealed class TextDrawable : DrawableBase
 #else
                     skCanvas.DrawText(typefaceSpan.Text, x + fillAdvance, y, skPaint);
 #endif
+
+                    // Implementation of underline
+                    if (svgTextBase.TextDecoration.HasFlag(SvgTextDecoration.Underline))
+                    {
+                        // Thickness should come from svg property 'underline-thickness'
+                        // That will be in font coordinates, so it will scale with font size
+                        // using 5% of font size as default
+                        var thickness = skPaint.TextSize * 0.05f;
+
+                        DrawLine(x + fillAdvance, y + thickness * 1.5f, typefaceSpan.Advance, thickness, skPaint, skCanvas);
+                    }
+
+
+
                     skPaint = skPaint.Clone(); // Don't modify stored skPaint objects
                     fillAdvance += typefaceSpan.Advance;
                 }
+
+
             }
         }
 
