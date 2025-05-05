@@ -52,21 +52,25 @@ class Build : NukeBuild
     {
         Configuration = Configuration ?? "Release";
         VersionSuffix = VersionSuffix ?? "";
-        Version = Solution.GetProject("Svg.Skia").GetProperty("Version");
+        Version = Solution.GetAllProjects("Svg.Skia").First().GetProperty("Version");
         IsRunningOnAzure = Host is AzurePipelines || Environment.GetEnvironmentVariable("LOGNAME") == "vsts";
 
         Console.WriteLine($"Version is: {Version}");
         Console.WriteLine($"Running on Azure: {IsRunningOnAzure}");
-        Console.WriteLine($"Branch is: {AzurePipelines.Instance.SourceBranchName}");
 
-        if (IsRunningOnAzure && int.TryParse(AzurePipelines.Instance.SourceBranchName, out int minor))
+        if(IsRunningOnAzure)
         {
-            // Always use branch name as minor part of version (must be an integer, i.e. complete naming release/2)
-            var currentVersion = new Version(Version);
-            var gruntVersion = new Version(currentVersion.Major, minor, currentVersion.Build, currentVersion.Revision);
+            Console.WriteLine($"Branch is: {AzurePipelines.Instance.SourceBranchName}");
 
-            Console.WriteLine($"Grunt Version is: {gruntVersion}");
-            Version = gruntVersion.ToString();
+            if (int.TryParse(AzurePipelines.Instance.SourceBranchName, out int minor))
+            {
+                // Always use branch name as minor part of version (must be an integer, i.e. complete naming release/2)
+                var currentVersion = new Version(Version);
+                var gruntVersion = new Version(currentVersion.Major, minor, currentVersion.Build, currentVersion.Revision);
+
+                Console.WriteLine($"Grunt Version is: {gruntVersion}");
+                Version = gruntVersion.ToString();
+            }
         }
     }
 
