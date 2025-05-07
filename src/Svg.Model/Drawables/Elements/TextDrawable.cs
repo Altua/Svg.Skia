@@ -305,6 +305,17 @@ public sealed class TextDrawable : DrawableBase
                         DrawLine(x + fillAdvance, y + thickness * 1.5f, typefaceSpan.Advance, thickness, skPaint, skCanvas);
                     }
 
+                    // Implementation of LineThrough
+                    if (svgTextBase.TextDecoration.HasFlag(SvgTextDecoration.LineThrough))
+                    {
+                        // Thickness should come from svg property 'underline-thickness'
+                        // That will be in font coordinates, so it will scale with font size
+                        // using 5% of font size as default
+                        var thickness = skPaint.TextSize * 0.05f;
+                        
+                        DrawLine(x + fillAdvance, y - skPaint.TextSize * 0.3f, typefaceSpan.Advance, thickness, skPaint, skCanvas);
+                    }
+
 
 
                     skPaint = skPaint.Clone(); // Don't modify stored skPaint objects
